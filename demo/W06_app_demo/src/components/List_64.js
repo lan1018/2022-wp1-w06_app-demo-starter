@@ -23,4 +23,4 @@ const List_64 = ( { items } ) => {
   )
 }
 
-export default List_64
+export default List_64;

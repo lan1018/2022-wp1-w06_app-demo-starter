@@ -2,14 +2,28 @@ import React, { useState, useEffect } from 'react';
 import List_64 from './components/List_64';
 import Alert_64 from './components/Alert_64';
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem('list');
+  if(list) {
+    return JSON.parse(localStorage.getItem('list')); 
+  } else {
+    return [];
+  } //字串轉成陣列
+  }
+
+
 const App_64 = () => {
   const [name, setName] = useState('');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(getLocalStorage());
   const [alert, setAlert] = useState({
     show: false,
     msg: '',
     type: '',
   });
+
+  useEffect( () => {
+    localStorage.setItem('list', JSON.stringify(list)); //陣列轉成字串
+  }, [list]);
 
   const showAlert = (show = false, msg = '', type = '') => {
     setAlert({ show, msg, type });
